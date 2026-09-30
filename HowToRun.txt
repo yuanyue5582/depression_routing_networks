@@ -1,0 +1,30 @@
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install -y build-essential cmake git
+
+sudo apt install -y libgdal-dev
+
+gdal-config --version
+
+cd ~/C_Project/basinModel7
+
+mkdir build
+cd build
+
+cmake ..
+make -j$(nproc)
+
+./hydro_model
+
+
+# 防止乱码
+sudo apt install recode
+find . -name "*.cpp" -o -name "*.h" | xargs recode GB18030..UTF-8
+
+重新编译：
+cd ~/basinModel8/build
+rm -rf *          # 清空构建目录
+cmake ..
+make -j$(nproc)
+
